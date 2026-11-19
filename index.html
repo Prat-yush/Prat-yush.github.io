@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pratyush Kumar — SDET / QA Automation Engineer</title>
+<meta name="description" content="Pratyush Kumar — SDET and QA automation engineer. I like breaking code, and making sure it doesn't break again.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#09090b;--panel:#111114;--panel2:#16161a;--line:#24242a;
+  --ink:#f4f4f5;--mute:#8a8a94;--soft:#c9c9d1;
+  --acc:#c4f24a;--acc-dim:rgba(196,242,74,.12);--fail:#ff5c5c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 "IBM Plex Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+::selection{background:var(--acc);color:#000}
+
+/* run bar */
+.runbar{position:fixed;inset:0 0 auto 0;z-index:30;background:rgba(9,9,11,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.runbar .wrap{display:flex;align-items:center;justify-content:space-between;height:52px;font-size:12.5px}
+.runbar .status{color:var(--mute)}
+.runbar .status b{color:var(--acc);font-weight:500}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);margin-right:8px;box-shadow:0 0 10px var(--acc);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.runbar nav a{color:var(--mute);text-decoration:none;margin-left:22px;transition:color .2s}
+.runbar nav a:hover{color:var(--acc)}
+.progress{height:2px;background:var(--acc);width:0;box-shadow:0 0 8px var(--acc)}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:70px;position:relative}
+.grid-bg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse at 30% 40%,#000 10%,transparent 65%);opacity:.5}
+.prompt{color:var(--mute);font-size:14px}
+.prompt .c{color:var(--acc)}
+.cursor{display:inline-block;width:9px;height:17px;background:var(--acc);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.name{font-family:Sora,sans-serif;font-weight:800;font-size:clamp(52px,9.5vw,118px);letter-spacing:-.045em;line-height:.95;margin:24px 0 26px}
+.tagline{font-family:Sora,sans-serif;font-weight:600;font-size:clamp(22px,3.4vw,38px);line-height:1.2;letter-spacing:-.02em;max-width:820px}
+.tagline .strike{position:relative;color:var(--mute)}
+.tagline .strike::after{content:"";position:absolute;left:0;right:0;top:55%;height:3px;background:var(--fail);transform:scaleX(0);transform-origin:left;transition:transform .6s .9s cubic-bezier(.7,0,.2,1)}
+.hero.in .tagline .strike::after{transform:scaleX(1)}
+.tagline .fix{color:var(--acc)}
+.edu{margin-top:26px;color:var(--mute);font-size:14px}
+.edu span{color:var(--soft)}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.btn{padding:11px 18px;border-radius:10px;border:1px solid var(--line);text-decoration:none;font-size:14px;font-weight:500;background:var(--panel);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn:hover{border-color:var(--acc);color:var(--acc)}
+.btn.resume{border-color:rgba(196,242,74,.45);color:var(--acc)}
+.btn.resume svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linejoin:round}
+.btn.resume:hover{background:var(--acc-dim)}
+.btn.go{background:var(--acc);border-color:var(--acc);color:#000}
+.btn.go:hover{color:#000;filter:brightness(1.08)}
+.scroll{position:absolute;bottom:34px;left:28px;font-size:12px;color:var(--mute);display:flex;align-items:center;gap:10px}
+.scroll i{width:1px;height:38px;background:linear-gradient(var(--acc),transparent);animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}60%{transform:scaleY(1);transform-origin:top}61%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* statement headings */
+.statement{min-height:72vh;display:flex;flex-direction:column;justify-content:center}
+.statement .suite{font-size:13px;color:var(--mute);margin-bottom:18px;opacity:0;transition:opacity .6s}
+.statement .suite b{color:var(--acc);font-weight:400}
+.statement h2{font-family:Sora,sans-serif;font-weight:800;font-size:clamp(46px,8.5vw,108px);letter-spacing:-.045em;line-height:.98}
+.statement h2 .w{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.08em}
+.statement h2 .w>span{display:inline-block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.75,.15,1)}
+.statement h2 .acc{color:var(--acc)}
+.statement.in .suite{opacity:1}
+.statement.in h2 .w>span{transform:none}
+
+/* companies */
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start;perspective:1200px;padding-bottom:120px}
+.job{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px 20px;position:relative;overflow:hidden;
+  opacity:0;transform:translateY(70px) rotateX(18deg);transform-origin:top center;clip-path:inset(0 0 100% 0 round 16px);
+  transition:opacity .7s,transform 1s cubic-bezier(.2,.75,.15,1),clip-path 1s cubic-bezier(.2,.75,.15,1),border-color .3s}
+.job.in{opacity:1;transform:none;clip-path:inset(0 0 0 0 round 16px)}
+.job:nth-child(2){transition-delay:.15s}.job:nth-child(3){transition-delay:.3s}
+.job::before{content:"";position:absolute;left:0;top:0;height:2px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform 1s .6s cubic-bezier(.7,0,.2,1)}
+.job.in::before{transform:scaleX(1)}
+.job:hover{border-color:#34343c}
+.job .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.mono-badge{width:44px;height:44px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);display:grid;place-items:center;font-family:Sora;font-weight:700;font-size:18px;color:var(--acc)}
+.mono-badge.logo{overflow:hidden;padding:0;background:#fff;border-color:#2a2a31}
+.mono-badge.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.mono-badge.inset img{width:56%;height:56%;margin:auto;border-radius:4px}
+.mono-badge.inset{display:grid;place-items:center}
+.mono-badge.ansys{background:#fff;padding:0;display:grid;place-items:center}
+.mono-badge.ansys svg{width:64%;height:64%}
+.check{font-size:11.5px;color:var(--acc);display:flex;align-items:center;gap:6px;opacity:0;transition:opacity .4s 1.1s}
+.job.in .check{opacity:1}
+.job h3{font-family:Sora,sans-serif;font-size:24px;font-weight:700;letter-spacing:-.02em;margin:18px 0 2px}
+.job .title{color:var(--soft);font-weight:500;font-size:15px}
+.job .meta{font-size:12.5px;color:var(--mute);margin-top:10px;display:flex;flex-direction:column;gap:2px}
+.job ul{list-style:none;margin-top:16px}
+.job li{position:relative;padding-left:16px;margin:8px 0;font-size:14.5px;color:var(--soft)}
+.job li::before{content:"›";position:absolute;left:0;color:var(--acc)}
+.more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.75,.15,1)}
+.more>div{overflow:hidden}
+.job.open .more{grid-template-rows:1fr}
+.more .inner{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips span{font-size:11px;padding:3px 9px;border-radius:6px;background:var(--acc-dim);color:var(--acc)}
+.toggle{margin-top:16px;background:none;border:0;color:var(--mute);font:500 12.5px "IBM Plex Mono",monospace;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:6px 0;transition:color .2s}
+.toggle:hover{color:var(--acc)}
+.toggle .pm{width:18px;height:18px;border:1px solid currentColor;border-radius:5px;display:grid;place-items:center;transition:transform .3s}
+.job.open .toggle .pm{transform:rotate(45deg)}
+
+/* rows (projects + toolkit) */
+.rows{padding-bottom:120px}
+.row{display:grid;grid-template-columns:28px 1fr auto;gap:18px;align-items:center;padding:24px 4px;border-top:1px solid var(--line);text-decoration:none;
+  opacity:0;transform:translateX(-40px);transition:opacity .7s,transform .8s cubic-bezier(.2,.75,.15,1),background .25s}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row.in{opacity:1;transform:none}
+a.row:hover{background:var(--panel)}
+.tick{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;transition:all .35s .3s}
+.tick svg{width:12px;height:12px;stroke:#000;stroke-width:3;fill:none;stroke-dasharray:20;stroke-dashoffset:20;transition:stroke-dashoffset .4s .55s}
+.in .tick{background:var(--acc);border-color:var(--acc)}
+.in .tick svg{stroke-dashoffset:0}
+.row h3{font-family:Sora,sans-serif;font-size:clamp(20px,2.4vw,26px);font-weight:700;letter-spacing:-.02em}
+.row p{color:var(--mute);font-size:15px;margin-top:2px}
+.pill{font:500 10.5px "IBM Plex Mono",monospace;padding:2px 8px;border-radius:999px;border:1px solid var(--acc);color:var(--acc);margin-left:8px;vertical-align:middle;letter-spacing:0}
+.gh{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);display:grid;place-items:center;transition:all .25s}
+.gh svg{width:18px;height:18px;fill:var(--soft);transition:fill .25s}
+a.row:hover .gh{border-color:var(--acc);transform:rotate(-8deg)}
+a.row:hover .gh svg{fill:var(--acc)}
+.tools{font-size:13px;color:var(--soft);text-align:right;max-width:420px}
+
+/* finale */
+.finale{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 0}
+.term{width:100%;max-width:640px;background:var(--panel);border:1px solid var(--line);border-radius:14px;text-align:left;font-size:13.5px;overflow:hidden;opacity:0;transform:translateY(30px);transition:all .8s}
+.term .bar{display:flex;gap:7px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#2a2a31}
+.term .body{padding:18px 20px;line-height:1.9;color:var(--soft)}
+.term .ok{color:var(--acc)}
+.finale.in .term{opacity:1;transform:none}
+.finale h2{font-family:Sora,sans-serif;font-weight:800;font-size:clamp(44px,8vw,96px);letter-spacing:-.045em;line-height:1;margin-top:56px;opacity:0;transform:scale(.94);transition:all .9s .5s cubic-bezier(.2,.75,.15,1)}
+.finale h2 span{color:var(--acc)}
+.finale .sub{color:var(--mute);margin-top:16px;opacity:0;transition:opacity .8s .8s}
+.finale .cta{justify-content:center;opacity:0;transition:opacity .8s 1s}
+.finale.in h2{opacity:1;transform:none}
+.finale.in .sub,.finale.in .cta{opacity:1}
+footer{text-align:center;color:var(--mute);font-size:12px;padding:30px 0 50px}
+
+.fade{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s cubic-bezier(.2,.75,.15,1)}
+.fade.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.24s}.d3{transition-delay:.36s}.d4{transition-delay:.48s}
+
+@media (max-width:900px){.jobs{grid-template-columns:1fr}.job:nth-child(n){transition-delay:0s}.runbar nav{display:none}.tools{display:none}.row{grid-template-columns:28px 1fr auto}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.fade,.job,.row,.term,.finale h2,.finale .sub,.finale .cta,.statement .suite{opacity:1!important;transform:none!important;clip-path:none!important}.statement h2 .w>span{transform:none!important}}
+</style>
+</head>
+<body>
+<div class="runbar">
+  <div class="wrap mono">
+    <div class="status"><span class="dot"></span>pratyush.spec.ts · <b id="passed">0</b>/<span id="total">0</span> passed</div>
+    <nav><a href="#work">work</a><a href="#build">projects</a><a href="#toolkit">toolkit</a><a href="#contact">contact</a></nav>
+  </div>
+  <div class="progress" id="progress"></div>
+</div>
+
+<header class="wrap hero" id="top">
+  <div class="grid-bg"></div>
+  <div class="prompt mono fade"><span class="c">~/pratyush</span> $ npx playwright test <span class="cursor"></span></div>
+  <h1 class="name fade d1">Pratyush Kumar</h1>
+  <p class="tagline fade d2">I like <span class="strike">breaking code.</span><br>And making sure <span class="fix">it doesn't break again.</span></p>
+  <p class="edu mono fade d3">SDET · QA Automation &nbsp;/&nbsp; <span>MS CS, Texas A&amp;M '27</span> &nbsp;/&nbsp; <span>BS CS, Texas Tech '22</span></p>
+  <div class="cta fade d4">
+    <a class="btn go" href="#work">Run the suite ↓</a>
+    <a class="btn resume" href="resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 1.5h5.5L13 5v9.5H4z M9.5 1.5V5H13 M6 8.5h5 M6 11h5"/></svg>Resume</a>
+    <a class="btn" href="https://github.com/Prat-yush" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://www.linkedin.com/in/pratyush-kumar-663680175" target="_blank" rel="noopener">LinkedIn</a>
+  </div>
+  <div class="scroll mono"><i></i>scroll</div>
+</header>
+
+<!-- WORK -->
+<section id="work">
+  <div class="wrap statement">
+    <div class="suite mono"><b>describe</b>('experience', () =&gt; {</div>
+    <h2 data-split>Teams I've <span class="acc">shipped</span> with</h2>
+  </div>
+  <div class="wrap jobs">
+    <article class="job t">
+      <div class="top"><div class="mono-badge logo"><img src="data:image/png;base64,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" alt="Lendbuzz logo"></div><div class="check mono">✓ passed</div></div>
+      <h3>Lendbuzz</h3>
+      <div class="title">Software Engineer in Test (Co-op)</div>
+      <div class="meta mono"><span>Boston, MA</span><span>Jan 2026 — May 2026</span></div>
+      <ul>
+        <li>Built API and UI test plans for high-traffic fintech payment flows</li>
+        <li>Cut a 3-hour Playwright suite to under 2 hours</li>
+      </ul>
+      <div class="more"><div><div class="inner">
+        <ul>
+          <li>Wrote about 50 test cases from user stories and acceptance criteria with Product and Engineering, and tracked defects to resolution</li>
+          <li>Rebuilt email testing around an external REST service. Coverage grew 50% and execution got over an hour faster</li>
+          <li>Added API-level validation to the UI flows and maintained the CI/CD pipelines behind daily production releases</li>
+          <li>Containerized test environments with Docker, automated security-focused API tests and stabilized flaky time-dependent tests</li>
+          <li>Ran k6 load tests and tracked latency, throughput and error rates in Grafana</li>
+        </ul>
+        <div class="chips mono"><span>Playwright</span><span>TypeScript</span><span>Docker</span><span>k6</span><span>Grafana</span></div>
+      </div></div></div>
+      <button class="toggle" aria-expanded="false"><span class="pm">+</span><span class="lbl">know more</span></button>
+    </article>
+
+    <article class="job t">
+      <div class="top"><div class="mono-badge logo inset"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADU0lEQVR4AcSWTUhUURTHD0NFiqmpRJmYUYItGvqEoQgdN4VFYlkrpTQoxIVTCGEkokRSCSkUUtAHWQQllYuileaiCIpMV4VQCNkuKwrcVe93x/u4ztyn72WheN6598w5//Ofe849b0L1Dz7+nk8JyTz/JRHITl0gZesyXSnMWfxfKboEomvT5VJFgbTuzJOyIofAlDTsWK7sfIZA7l8yUgSaSnNl//oshTv4elRprwfkIIK0OWRTFioIL3dPO7FghCrDWbIyY5GEwvVKorWdSuv9vthVGfs8YQXKcsp1YU++e0JHI8tkppJF8tNc38b2u/E8JWvS1cKawTE+6h+W1bualQ+kapt7PAmFV6RKYsn4llqqNucI8eDc7HvpoIsEPj8CTUKt3U9k+P24ArM9KKlOaibWvoEJ6ECtW7sfy8YDZ9UJ9Q2MKE0iLZQU0to/Uc+ZAIA3zlTLr5HLUtFwhW0gUQQyl6QECjKdSXxob0Q2HWw3zb7XIQInnnf4DjAdSc6eOr9994llYAkRSJMAVrK10DfAw65jri91ZlOQmy0XT1aqcoCHbTZRJaBJsrY3CqAEUlPAvIIpWXk0rD7+/nPSTfjhaZuMjX9xG1E5zPJQBPD59mNSlm5rVMGDr0YFEpCxiVkyGk93PLrz9gBwvsUlYEZwIhwrgInCN9a+fPbMIav3f6OtBLyAOPqMtPiN8RrPXrFe9kAEhu6fcnEYPu5mDotABFblxt+Y5KNn0DY5XB6Rry86VHNCmpOz+WHzTcC8oifO9xKbJCSiaYud66wbuqb5ltC0G4rykvwx+CbQUFWKvxJbp5OARFznmtM9yo8Hc4aX1Zt7TWyTxDcBfe+TEKYMJOBW2ErDK33KLUn5JpAUaRg4dka6YfK9DEyAuW+iMzG5khy1aTfXseqouZ22DkxgWrSzGeptUr+YnKXnv54dNgffBLru2Ecs3W4D1raWut1qWXqkU+nEh28Cx8/Fr17xFv9vTJK11JWhxGtk+yYAivkeYD+b0Jz4cDvQNglEQB83U84GZtp0cuaCaU9cByJAMIA0lRcJJqZOzje3zQVwtAQmACDADBcSDVyPCcLMZ99/LSY0HD46yUw6MAENxrglCb8bEN6O7BGz4bS/l/4DAAD//wxdqJoAAAAGSURBVAMAcwibMHWXVtkAAAAASUVORK5CYII=" alt="Transperfect logo"></div><div class="check mono">✓ passed</div></div>
+      <h3>Transperfect</h3>
+      <div class="title">Software QA Automation Engineer</div>
+      <div class="meta mono"><span>New York, NY</span><span>Sept 2022 — June 2025</span></div>
+      <ul>
+        <li>Co-built a Java automation suite from scratch</li>
+        <li>Replaced about 3 hours of manual regression per release</li>
+      </ul>
+      <div class="more"><div><div class="inner">
+        <ul>
+          <li>Set up page objects, test data management and CI execution for a top-revenue product</li>
+          <li>Defined QA strategy with Product and Engineering, wrote 200+ test cases and cut UI execution time by over 2 hours</li>
+          <li>Built reusable Rest Assured API clients with shared auth, request specs and JSON schema validation</li>
+          <li>Ran functional, integration and E2E tests across concurrent projects, and resolved critical bugs with developers before release</li>
+        </ul>
+        <div class="chips mono"><span>Java</span><span>Playwright</span><span>Rest Assured</span><span>Jenkins</span></div>
+      </div></div></div>
+      <button class="toggle" aria-expanded="false"><span class="pm">+</span><span class="lbl">know more</span></button>
+    </article>
+
+    <article class="job t">
+      <div class="top"><div class="mono-badge logo ansys"><svg fill="#1a1a1a" aria-hidden="true" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.0424 10.089l-.993 2.4233-.9932-2.4233h-1.227l1.6066 3.921-.7039 1.7179h1.227l2.3104-5.639zm4.667 2.1272c-.1936-.1936-.5004-.3377-.9209-.4332l-.6984-.1599c-.1678-.0447-.2858-.0923-.3531-.143-.0673-.0506-.101-.1207-.101-.2101 0-.1232.0562-.2186.1683-.2859.112-.0673.2664-.101.4628-.101.426 0 .858.1513 1.2954.4542l.3362-.841c-.2241-.1627-.4767-.2886-.757-.3784a2.8304 2.8304 0 0 0-.8663-.1347c-.3476 0-.6576.0562-.9292.1683-.2724.112-.4826.2665-.631.4624-.1485.1964-.223.4237-.223.6814 0 .3254.0939.582.282.7696.1876.188.4806.3267.8789.4165l.673.1517c.2075.0447.3492.0954.4248.1512.076.0562.1136.1346.1136.2356 0 .1124-.0546.2007-.1639.2648-.1092.0645-.262.0966-.4584.0966-.2748 0-.5468-.042-.816-.1259-.2692-.0843-.5163-.2019-.7403-.3531l-.3366.8745c.23.1628.5032.2875.8204.3746.3167.0867.6655.1302 1.0471.1302.555 0 .991-.1136 1.3081-.3408.3167-.2273.4751-.5397.4751-.938-.0008-.331-.0974-.593-.2906-.7866zm-9.3815-.4332l-.698-.1599c-.1682-.0447-.2862-.0923-.3535-.143-.0669-.0506-.1006-.1207-.1006-.2101 0-.1232.0558-.2186.168-.2859.112-.0673.2664-.101.4627-.101.426 0 .858.1513 1.2955.4542l.3365-.841c-.2245-.1627-.4767-.2886-.757-.3784a2.8323 2.8323 0 0 0-.8663-.1347c-.348 0-.6576.0562-.9296.1683-.272.112-.4822.2665-.6306.4624-.1489.1964-.223.4237-.223.6814 0 .3254.0943.582.282.7696.1876.188.481.3267.8793.4165l.673.1517c.2075.0447.3488.0954.4248.1512.0756.0562.1137.1346.1137.2356 0 .1124-.0546.2007-.164.2648-.1092.0645-.2624.0966-.4584.0966-.2748 0-.5468-.042-.816-.1259-.2688-.0843-.5159-.2019-.7403-.3531l-.3362.8745c.2297.1628.5032.2875.82.3746.3167.0867.6659.1302 1.0471.1302.5551 0 .991-.1136 1.3081-.3408.3168-.2273.4751-.5397.4751-.938 0-.3305-.0966-.593-.2902-.7862-.1944-.194-.5012-.3381-.922-.4336zM9.823 9.9828c-.2918 0-.5539.059-.7863.1766-.2328.1176-.422.2886-.5677.5131v-.5887H7.2325v4.1301h1.27v-2.3133c0-.2803.08-.5048.24-.673.1595-.1683.3713-.2526.635-.2526.219 0 .3797.0645.4838.1936.1037.129.1556.3337.1556.614v2.431h1.27v-2.49c0-.5831-.1207-1.019-.3618-1.308-.2415-.2882-.6089-.4328-1.1022-.4328zM4.4334 8.4594l-.8176 1.9954 1.5381 3.7544h1.7262zm-.3726-.1873H2.4325L0 14.2091h1.6284z"/></svg></div><div class="check mono">✓ passed</div></div>
+      <h3>Ansys</h3>
+      <div class="title">Software Engineering Co-op</div>
+      <div class="meta mono"><span>Canonsburg, PA</span><span>Jan 2021 — Dec 2021</span></div>
+      <ul>
+        <li>Wrote unit and regression tests for Ansys Discovery</li>
+        <li>Made the SpaceClaim plugin platform-independent</li>
+      </ul>
+      <div class="more"><div><div class="inner">
+        <ul>
+          <li>Validated code migrations in 3D simulation desktop software (Design Business Unit)</li>
+          <li>Triaged test failures with documented root-cause analysis to speed up fixes with developers</li>
+          <li>Removed intermediate classes from the SpaceClaim plugin, which reduced data loss across supported environments</li>
+        </ul>
+        <div class="chips mono"><span>C#</span><span>C++</span><span>Unit testing</span></div>
+      </div></div></div>
+      <button class="toggle" aria-expanded="false"><span class="pm">+</span><span class="lbl">know more</span></button>
+    </article>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="build">
+  <div class="wrap statement">
+    <div class="suite mono"><b>describe</b>('projects', () =&gt; {</div>
+    <h2 data-split>Things I <span class="acc">build</span></h2>
+  </div>
+  <div class="wrap rows">
+    <a class="row t" href="https://github.com/Prat-yush/sdet-platform" target="_blank" rel="noopener">
+      <div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>SDET Platform<span class="pill">in progress</span></h3><p>A layered Playwright + TypeScript framework: UI, API, contract, CI, performance, security and LLM-eval tests on one app.</p></div>
+      <div class="gh" aria-label="GitHub"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></div>
+    </a>
+    <a class="row t" href="https://github.com/Prat-yush/Playwright_java_framework" target="_blank" rel="noopener">
+      <div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Playwright Java Framework</h3><p>Page-object UI and API tests in Java, data-driven, with TestNG suites and Allure reports.</p></div>
+      <div class="gh" aria-label="GitHub"><svg viewBox="0 0 16 16"><use href="#gh"/></svg></div>
+    </a>
+    <a class="row t" href="https://github.com/Prat-yush/tamu-bike-theft-tracker" target="_blank" rel="noopener">
+      <div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Campus Bike Theft Tracker</h3><p>A scheduled data pipeline that grades every TAMU bike-rack zone from A+ to F using police theft reports.</p></div>
+      <div class="gh" aria-label="GitHub"><svg viewBox="0 0 16 16"><use href="#gh"/></svg></div>
+    </a>
+    <a class="row t" href="https://github.com/Prat-yush/TAMU-Micromobility" target="_blank" rel="noopener">
+      <div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>TAMU Micromobility</h3><p>A D3 dashboard mapping campus scooter and bike rides, conflict points and thefts. Built as a course project.</p></div>
+      <div class="gh" aria-label="GitHub"><svg viewBox="0 0 16 16"><use href="#gh"/></svg></div>
+    </a>
+    <a class="row t" href="https://github.com/Prat-yush/atmosphere-aware-restaurant-search" target="_blank" rel="noopener">
+      <div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>AmbiSense</h3><p>Search restaurants by vibe, like "quiet but not boring", backed by evidence from Yelp reviews. Built as a course project.</p></div>
+      <div class="gh" aria-label="GitHub"><svg viewBox="0 0 16 16"><use href="#gh"/></svg></div>
+    </a>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap statement">
+    <div class="suite mono"><b>describe</b>('education', () =&gt; {</div>
+    <h2 data-split>Institutions I <span class="acc">learned</span> from</h2>
+  </div>
+  <div class="wrap rows">
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Texas A&amp;M University</h3><p>M.S. Computer Science · College Station, TX</p></div>
+      <div class="tools mono">Aug 2025 — May 2027</div></div>
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Texas Tech University</h3><p>B.S. Computer Science, Minor in Mathematics · GPA 3.82 · President's List · Lubbock, TX</p></div>
+      <div class="tools mono">Graduated May 2022</div></div>
+  </div>
+</section>
+
+<!-- TOOLKIT -->
+<section id="toolkit">
+  <div class="wrap statement">
+    <div class="suite mono"><b>describe</b>('toolkit', () =&gt; {</div>
+    <h2 data-split>Tools I <span class="acc">trust</span></h2>
+  </div>
+  <div class="wrap rows">
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Test frameworks</h3><p>Playwright · Selenium · Rest Assured · JUnit · TestNG · PyTest · Postman</p></div><div></div></div>
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Languages</h3><p>Java · TypeScript · JavaScript · Python · SQL · C# · C++</p></div><div></div></div>
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>CI / CD &amp; infra</h3><p>GitHub Actions · Jenkins · Docker · AWS (Certified Cloud Practitioner)</p></div><div></div></div>
+    <div class="row t"><div class="tick"><svg viewBox="0 0 12 12"><path d="M2 6.5l2.5 2.5L10 3.5"/></svg></div>
+      <div><h3>Performance &amp; observability</h3><p>k6 load testing · Grafana dashboards</p></div><div></div></div>
+  </div>
+</section>
+
+<!-- FINALE -->
+<section id="contact" class="wrap finale">
+  <div class="term mono">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div class="body">
+      <div>Running <span id="sum-total">0</span> tests using 1 worker</div>
+      <div class="ok">  ✓ experience (3)</div>
+      <div class="ok">  ✓ projects (5)</div>
+      <div class="ok">  ✓ education (2)</div>
+      <div class="ok">  ✓ toolkit (4)</div>
+      <div>&nbsp;</div>
+      <div><span class="ok"><span id="sum-passed">0</span> passed</span> · 0 failed · 0 flaky</div>
+    </div>
+  </div>
+  <h2><span>All checks passed.</span><br>Let's talk.</h2>
+  <p class="sub">Open to full-time SDET / QA automation roles.</p>
+  <div class="cta">
+    <a class="btn go" href="mailto:pratyush@tamu.edu">pratyush@tamu.edu</a>
+    <a class="btn" href="https://www.linkedin.com/in/pratyush-kumar-663680175" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="https://github.com/Prat-yush" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</section>
+
+<svg width="0" height="0" style="position:absolute"><symbol id="gh" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol></svg>
+
+<script>
+// split statement headings into word masks
+document.querySelectorAll('[data-split]').forEach(h=>{
+  const nodes=[...h.childNodes];h.innerHTML='';let i=0;
+  nodes.forEach(n=>{
+    const text=n.textContent,cls=n.nodeType===1?n.className:'';
+    text.split(/(\s+)/).forEach(t=>{
+      if(!t)return;
+      if(/^\s+$/.test(t)){h.appendChild(document.createTextNode(' '));return}
+      const w=document.createElement('span');w.className='w';
+      const s=document.createElement('span');s.textContent=t;if(cls)s.className=cls;
+      s.style.transitionDelay=(i++*0.09)+'s';w.appendChild(s);h.appendChild(w);
+    });
+  });
+});
+
+const tests=[...document.querySelectorAll('.t')];
+const total=tests.length;
+['total','sum-total'].forEach(id=>document.getElementById(id).textContent=total);
+const passedEl=document.getElementById('passed'),sumPassed=document.getElementById('sum-passed');
+function count(){const n=tests.filter(t=>t.classList.contains('in')).length;passedEl.textContent=n;sumPassed.textContent=n}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  e.target.classList.add('in');io.unobserve(e.target);
+  if(e.target.classList.contains('jobs'))e.target.querySelectorAll('.job').forEach(j=>j.classList.add('in'));
+  count();
+}),{threshold:.15,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.fade,.statement,.jobs,.row,.finale').forEach(el=>io.observe(el));
+requestAnimationFrame(()=>document.getElementById('top').classList.add('in'));
+
+// stagger rows within each list
+document.querySelectorAll('.rows').forEach(r=>[...r.children].forEach((c,i)=>c.style.transitionDelay=(i%5)*0.08+'s'));
+
+// know more toggles
+document.querySelectorAll('.job .toggle').forEach(b=>b.addEventListener('click',()=>{
+  const j=b.closest('.job'),open=j.classList.toggle('open');
+  b.setAttribute('aria-expanded',open);b.querySelector('.lbl').textContent=open?'show less':'know more';
+}));
+
+const bar=document.getElementById('progress');
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+</script>
+</body>
+</html>
